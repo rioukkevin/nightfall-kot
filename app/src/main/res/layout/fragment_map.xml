@@ -4,10 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:text="@string/view_map"
-        android:layout_height="wrap_content"/>
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/poiMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>
