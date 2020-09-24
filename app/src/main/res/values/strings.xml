@@ -3,4 +3,5 @@
     <string name="view_home">Home</string>
     <string name="view_map">Map</string>
     <string name="view_qr">QR Code</string>
+    <string name="view_share">QR Code</string>
 </resources>
