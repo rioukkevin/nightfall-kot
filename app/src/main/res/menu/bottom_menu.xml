@@ -3,14 +3,14 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/view_home"
-        android:iconTint="@color/colorGrey"/>
+        android:iconTint="@color/colorGrey"
+        android:title="@string/view_home" />
 
     <item
         android:id="@+id/navigation_map"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/view_map"
-        android:iconTint="@color/colorGrey"/>
+        android:iconTint="@color/colorGrey"
+        android:title="@string/view_map" />
 
     <item
         android:id="@+id/navigation_share"
@@ -21,7 +21,7 @@
     <item
         android:id="@+id/navigation_qr"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/view_qr"
-        android:iconTint="@color/colorGrey"/>
+        android:iconTint="@color/colorGrey"
+        android:title="@string/view_qr" />
 
 </menu>
