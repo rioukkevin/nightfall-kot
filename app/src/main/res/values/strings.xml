@@ -2,5 +2,6 @@
     <string name="app_name">MYHelloWorld</string>
     <string name="view_home">Home</string>
     <string name="view_map">Map</string>
+    <string name="view_share">Share</string>
     <string name="view_qr">QR Code</string>
 </resources>
