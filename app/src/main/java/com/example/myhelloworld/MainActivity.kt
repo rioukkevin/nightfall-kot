@@ -45,6 +45,12 @@ class MainActivity : AppCompatActivity()  {
                     return@setOnNavigationItemSelectedListener true
                 }
 
+                R.id.navigation_news-> {
+                    title=resources.getString(R.string.view_news)
+                    loadFragment(NewsFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
             }
             false
 
