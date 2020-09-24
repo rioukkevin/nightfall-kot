@@ -13,6 +13,12 @@
         android:title="@string/view_map" />
 
     <item
+        android:id="@+id/navigation_share"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="@string/view_share"
+        android:iconTint="@color/colorGrey"/>
+
+    <item
         android:id="@+id/navigation_qr"
         android:icon="@drawable/ic_launcher_foreground"
         android:iconTint="@color/colorGrey"
