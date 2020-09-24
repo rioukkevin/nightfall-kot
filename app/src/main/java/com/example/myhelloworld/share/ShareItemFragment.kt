@@ -1,26 +1,19 @@
-package com.example.myhelloworld
+package com.example.myhelloworld.share
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.fragment.app.Fragment
-import com.example.myhelloworld.share.ShareItemFragment
+import com.example.myhelloworld.R
 
-
-class ShareFragment : Fragment() {
+class ShareItemFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_share, container, false)
+        return inflater.inflate(R.layout.fragment_share_item,container,false)
 
     }
-
-
-
-
 }

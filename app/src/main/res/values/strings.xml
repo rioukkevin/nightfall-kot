@@ -4,4 +4,5 @@
     <string name="view_map">Map</string>
     <string name="view_share">Share</string>
     <string name="view_qr">QR Code</string>
+    <string name="share_facebook_label">Facebook</string>
 </resources>
