@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity()  {
         } catch (e: NullPointerException) {
         }
 
+
         title=resources.getString(R.string.view_home)
         loadFragment(HomeFragment())
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity()  {
 
                 R.id.navigation_share-> {
                     title=resources.getString(R.string.view_share)
-                    loadFragment(ShareFragment())
+                    loadFragment(ShareFragment(activity = this@MainActivity ))
                     return@setOnNavigationItemSelectedListener true
                 }
 
