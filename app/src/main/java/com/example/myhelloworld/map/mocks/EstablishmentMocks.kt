@@ -1,7 +1,7 @@
 package com.example.myhelloworld.map.mocks
 
 import com.example.myhelloworld.map.models.Establishment
-import com.google.android.gms.maps.model.LatLng
+import com.example.myhelloworld.map.models.LatLng
 
 class EstablishmentMocks {
     companion object {
