@@ -6,13 +6,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     >
-    <ImageView
-        android:src="@drawable/background_image_dark"
-        tools:ignore="ContentDescription"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        />
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,38 +13,37 @@
         android:layout_column="0"
         android:layout_row="0"
         >
-
         <GridLayout
-            android:id="@+id/share_facebook"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="175dp"
+            android:layout_gravity="center"
+            android:id="@+id/share_facebook"
             android:layout_row="0"
-            android:layout_column="0"
-            android:layout_gravity="center">
+            android:layout_column="0">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="105dp"
                 android:layout_row="0"
                 android:layout_column="0"
-                android:src="@drawable/facebook"
+                android:src="@drawable/background_image_dark"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/share_facebook_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_row="1"
                 android:layout_column="0"
-                android:text="@string/share_facebook_label"
+                android:id="@+id/share_facebook_label"
+                android:text="Retrouvez nos bar partenaire sur nightfall.fr"
                 android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                />
 
         </GridLayout>
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="175dp"
             android:layout_gravity="center"
             android:id="@+id/share_twitter"
             android:layout_row="1"
@@ -63,7 +55,7 @@
                 android:layout_height="105dp"
                 android:layout_row="0"
                 android:layout_column="0"
-                android:src="@drawable/twitter"
+                android:src="@drawable/reouverure_bar"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -72,16 +64,15 @@
                 android:layout_row="1"
                 android:layout_column="0"
                 android:id="@+id/share_twitter_label"
-                android:text="@string/share_twitter_label"
+                android:text="La réouverture des bars et restaurants en France prévue le 2 juin 2020"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:textColor="@color/colorWhite"
                 />
 
         </GridLayout>
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="175dp"
             android:layout_gravity="center"
             android:id="@+id/share_other"
             android:layout_row="2"
@@ -93,7 +84,7 @@
                 android:layout_height="105dp"
                 android:layout_row="0"
                 android:layout_column="0"
-                android:src="@drawable/share_other"
+                android:src="@drawable/application"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -102,10 +93,9 @@
                 android:layout_row="1"
                 android:layout_column="0"
                 android:id="@+id/share_other_label"
-                android:text="@string/share_other_label"
+                android:text="L'application Nightfall débarque !"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:textColor="@color/colorWhite"
                 />
 
         </GridLayout>

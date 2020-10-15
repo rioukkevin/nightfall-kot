@@ -7,4 +7,5 @@
     <string name="share_facebook_label">Facebook</string>
     <string name="share_twitter_label">Twitter</string>
     <string name="share_other_label">Autres</string>
+    <string name="view_news">Actualités</string>
 </resources>

@@ -35,13 +35,19 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_share-> {
                     title=resources.getString(R.string.view_share)
-                    loadFragment(ShareFragment())
+                    loadFragment(ShareFragment(activity = this@MainActivity ))
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_qr -> {
                     title = resources.getString(R.string.view_qr)
                     loadFragment(QrFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.navigation_news-> {
+                    title=resources.getString(R.string.view_news)
+                    loadFragment(NewsFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
