@@ -15,9 +15,6 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-
-        val news : Array<News> = arrayOf<News>( News("News 1"), News("News 2"))
-
         return inflater.inflate(R.layout.fragment_news,container,false)
     }
 }
