@@ -1,5 +1,6 @@
-package com.example.myhelloworld.repositories.implementations
+package com.example.myhelloworld.repositories.abstractions
 
+import com.example.myhelloworld.model.User
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -9,6 +10,6 @@ interface IUserRepository {
     suspend fun getRanking()
 
     @GET("/users/{userId}")
-    suspend fun getUser(@Path("userId") userId: Int)
+    suspend fun getUser(@Path("userId") userId: Int): User
 
 }
