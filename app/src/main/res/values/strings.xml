@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">MYHelloWorld</string>
-    <string name="view_home">Home</string>
-    <string name="view_map">Map</string>
-    <string name="view_share">Share</string>
+    <string name="view_home">Accueil</string>
+    <string name="view_map">Carte</string>
+    <string name="view_share">Partage</string>
     <string name="view_qr">QR Code</string>
     <string name="share_facebook_label">Facebook</string>
     <string name="share_twitter_label">Twitter</string>

@@ -4,12 +4,13 @@ class EstablishmentType {
     /**
      * Establishment name
      */
-    private var name: String
+    var name: String
 
     /**
      * Type color
      */
-    private var color: String
+    var color: String
+
 
     constructor(name: String, color: String) {
         this.name = name

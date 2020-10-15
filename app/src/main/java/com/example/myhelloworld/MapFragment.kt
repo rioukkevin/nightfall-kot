@@ -162,6 +162,17 @@ class MapFragment : Fragment(), LocationListener {
             val marker = Marker(this.map)
             marker.title = estab.name
             marker.position = startPoint
+            val iconResourceId =
+                resources.getIdentifier(
+                    "ic_${estab.type.name.toLowerCase()}",
+                    "drawable",
+                    requireContext().packageName
+                )
+            if (iconResourceId != 0) {
+                marker.icon = ContextCompat.getDrawable(this.requireContext(), iconResourceId);
+
+            }
+
             this.map.overlays.add(marker)
         }
 
