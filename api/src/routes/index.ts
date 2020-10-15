@@ -34,7 +34,7 @@ withoutAuthenticationRouter.use("/auth", authenticationRoutes);
 appRouter.use("", withoutAuthenticationRouter);
 appRouter.use(
     "",
-    passport.authenticate("jwt", { session: false }),
+    // passport.authenticate("jwt", { session: false }),
     withAuthenticationRouter
 );
 

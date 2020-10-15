@@ -14,7 +14,7 @@ const authenticationRoutes: Router = express.Router();
 authenticationRoutes.post("/login", async (req: Request, res: Response) => {
     const loginInformation: LoginDto = req.body;
     if (!(loginInformation.email && loginInformation.password)) {
-        res.status(500);
+        res.status(400);
         res.json("Email or password are not correct");
     } else {
         //Authenticate with passport

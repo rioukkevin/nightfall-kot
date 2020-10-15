@@ -8,7 +8,6 @@ const usersRoutes: Router = express.Router();
 /**Get the ranking */
 usersRoutes.get("/ranking", async (req: Request, res: Response) => {
     const period = req.query.period as moment.unitOfTime.StartOf;
-    console.log(`Asked period is ${period}`);
     if (!period) {
         res.statusCode = 400;
         res.json(

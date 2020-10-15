@@ -9,13 +9,13 @@ var dotenv_1 = __importDefault(require("dotenv"));
 var connectToDb = function () {
     //Load env variables
     dotenv_1.default.config();
+    console.log(process.env.DB_CONNECTION);
     //Connect to mongo
     mongoose_1.default.connect(process.env.DB_CONNECTION, {
         useUnifiedTopology: true,
-        useNewUrlParser: true,
-    }, function (error) {
-        var _a;
-        console.log("Error while trying to connect to the mongo database : " + ((_a = error === null || error === void 0 ? void 0 : error.message) !== null && _a !== void 0 ? _a : ""));
+        useNewUrlParser: true
+    }, function () {
+        console.log('Connected du DB !');
     });
 };
 exports.connectToDb = connectToDb;
