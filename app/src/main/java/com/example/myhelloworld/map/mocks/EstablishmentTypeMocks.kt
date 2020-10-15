@@ -1,6 +1,6 @@
 package com.example.myhelloworld.map.mocks
 
-import com.example.myhelloworld.map.models.EstablishmentType
+import com.example.myhelloworld.model.EstablishmentType
 
 class EstablishmentTypeMocks {
     companion object {
