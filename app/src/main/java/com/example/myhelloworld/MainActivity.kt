@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_share-> {
                     title=resources.getString(R.string.view_share)
-                    loadFragment(ShareFragment())
+                    loadFragment(ShareFragment(activity = this@MainActivity ))
                     return@setOnNavigationItemSelectedListener true
                 }
 
