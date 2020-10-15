@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.myhelloworld.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity()  {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,31 +16,31 @@ class MainActivity : AppCompatActivity()  {
         } catch (e: NullPointerException) {
         }
 
-        title=resources.getString(R.string.view_home)
+        title = resources.getString(R.string.view_home)
         loadFragment(HomeFragment())
 
         navigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.navigation_map-> {
-                    title=resources.getString(R.string.view_map)
+            when (it.itemId) {
+                R.id.navigation_map -> {
+                    title = resources.getString(R.string.view_map)
                     loadFragment(MapFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.navigation_home-> {
-                    title=resources.getString(R.string.view_home)
+                R.id.navigation_home -> {
+                    title = resources.getString(R.string.view_home)
                     loadFragment(HomeFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_share-> {
                     title=resources.getString(R.string.view_share)
-                    loadFragment(ShareFragment())
+                    loadFragment(ShareFragment(activity = this@MainActivity ))
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.navigation_qr-> {
-                    title=resources.getString(R.string.view_qr)
+                R.id.navigation_qr -> {
+                    title = resources.getString(R.string.view_qr)
                     loadFragment(QrFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
