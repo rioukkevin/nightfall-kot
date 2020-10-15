@@ -52,7 +52,6 @@ usersRoutes.get("/ranking", function (req, res) { return __awaiter(void 0, void 
         switch (_c.label) {
             case 0:
                 period = req.query.period;
-                console.log("Asked period is " + period);
                 if (!!period) return [3 /*break*/, 1];
                 res.statusCode = 400;
                 res.json("Query parameter period is required but not provided in the request.");

@@ -85,7 +85,7 @@ authenticationRoutes.post("/login", function (req, res) { return __awaiter(void 
     return __generator(this, function (_a) {
         loginInformation = req.body;
         if (!(loginInformation.email && loginInformation.password)) {
-            res.status(500);
+            res.status(400);
             res.json("Email or password are not correct");
         }
         else {

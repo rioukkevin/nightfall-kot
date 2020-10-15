@@ -9,7 +9,6 @@ var establishments_1 = require("./establishments");
 var typeEstablishments_1 = require("./typeEstablishments");
 var transactions_1 = require("./transactions");
 var authentication_1 = require("./authentication");
-var passport_1 = __importDefault(require("passport"));
 /**Define global router for the application */
 var appRouter = express_1.default.Router();
 //#region With authentication routes
@@ -28,6 +27,8 @@ var withoutAuthenticationRouter = express_1.default.Router();
 withoutAuthenticationRouter.use("/auth", authentication_1.authenticationRoutes);
 //#endregion
 appRouter.use("", withoutAuthenticationRouter);
-appRouter.use("", passport_1.default.authenticate("jwt", { session: false }), withAuthenticationRouter);
+appRouter.use("", 
+// passport.authenticate("jwt", { session: false }),
+withAuthenticationRouter);
 exports.default = appRouter;
 //# sourceMappingURL=index.js.map
