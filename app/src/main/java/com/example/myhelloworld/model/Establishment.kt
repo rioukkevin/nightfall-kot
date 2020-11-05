@@ -1,6 +1,6 @@
 package com.example.myhelloworld.model
 
-import com.example.myhelloworld.map.models.LatLng
+import com.example.myhelloworld.map.models.Address
 
 class Establishment {
     /**
@@ -11,18 +11,17 @@ class Establishment {
     /**
      * Establishment location
      */
-    var location: LatLng
+    var address: Address
 
     /**
      * Type of this establishment
      */
-    var type: EstablishmentType
+    var establishment_type: EstablishmentType
 
-    constructor(name: String, location: LatLng, type: EstablishmentType) {
+    constructor(name: String, address: Address, type: EstablishmentType) {
         this.name = name
-        this.location = location
-        this.type = type
-        this.location
+        this.address = address
+        this.establishment_type = type
     }
 
 }

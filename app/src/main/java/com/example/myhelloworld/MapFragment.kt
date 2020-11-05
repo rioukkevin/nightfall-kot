@@ -2,8 +2,6 @@ package com.example.myhelloworld
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -12,13 +10,15 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.myhelloworld.map.mocks.EstablishmentMocks
+import com.example.myhelloworld.repositories.EstablishmentRepository
 import org.osmdroid.config.Configuration
+import org.osmdroid.library.BuildConfig
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.MinimapOverlay
 import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
@@ -27,7 +27,7 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
-class MapFragment : Fragment(), LocationListener {
+class MapFragment : Fragment() {
 
     //Properties
 
@@ -47,10 +47,9 @@ class MapFragment : Fragment(), LocationListener {
 
         //Configure map
         this.configureMap()
-//        val mapController: IMapController = this.mapView.getController()
-//        mapController.setZoom(9.5)
-//        val startPoint = GeoPoint(48.8583, 2.2944)
-//        mapController.setCenter(startPoint)
+
+        //Load markers
+        this.loadMarkers()
 
         requestPermissionsIfNecessary(
             arrayOf(
@@ -128,7 +127,6 @@ class MapFragment : Fragment(), LocationListener {
         }
     }
 
-
     private fun configureMap() {
 
         //Add tile
@@ -139,8 +137,10 @@ class MapFragment : Fragment(), LocationListener {
         configOsm.userAgentValue = BuildConfig.APPLICATION_ID
 
         //Zoom button and zoom with fingers
-        this.map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
+        this.map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.SHOW_AND_FADEOUT)
         this.map.zoomController.activate()
+        this.map.zoomController.setZoomInEnabled(true)
+        this.map.zoomController.setZoomOutEnabled(true)
         this.map.setMultiTouchControls(true)
 
         //Add compass
@@ -155,27 +155,6 @@ class MapFragment : Fragment(), LocationListener {
         this.map.setMultiTouchControls(true)
         this.map.overlays.add(rotationGestureOverlay)
 
-
-        //Add markers
-        EstablishmentMocks.establishments.forEach { estab ->
-            val startPoint = GeoPoint(estab.location.latitude, estab.location.longitude)
-            val marker = Marker(this.map)
-            marker.title = estab.name
-            marker.position = startPoint
-            val iconResourceId =
-                resources.getIdentifier(
-                    "ic_${estab.type.name.toLowerCase()}",
-                    "drawable",
-                    requireContext().packageName
-                )
-            if (iconResourceId != 0) {
-                marker.icon = ContextCompat.getDrawable(this.requireContext(), iconResourceId);
-
-            }
-
-            this.map.overlays.add(marker)
-        }
-
         //Add scale bar
         val dm: DisplayMetrics = requireContext().resources.displayMetrics
         val scaleBarOverlay = ScaleBarOverlay(this.map)
@@ -183,19 +162,53 @@ class MapFragment : Fragment(), LocationListener {
         scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10)
         this.map.overlays.add(scaleBarOverlay)
 
-        //Set position
         val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), this.map)
         locationOverlay.enableMyLocation()
         this.map.overlays.add(locationOverlay)
 
+        //Minimap
+        val minimapOverlay = MinimapOverlay(context, this.map.tileRequestCompleteHandler)
+        minimapOverlay.setWidth(dm.widthPixels / 5)
+        minimapOverlay.setHeight(dm.heightPixels / 5)
+        this.map.overlays.add(minimapOverlay)
+
+        //Set position
         this.map.controller.setZoom(15)
         this.map.controller.setCenter(GeoPoint(47.4667, -0.55))
 
 
     }
 
-    override fun onLocationChanged(location: Location) {
+    private fun loadMarkers() {
+        EstablishmentRepository()
+            .getEstablishments { establishments ->
+                for (establishment in establishments) {
+                    //Start point
+                    val position = GeoPoint(
+                        establishment.address.coordinate.latitude,
+                        establishment.address.coordinate.longitude
+                    )
 
+                    //Create marker
+                    val marker = Marker(this.map)
+                    marker.title = establishment.name
+                    marker.position = position
+
+                    //Marker icon
+                    val iconResourceId =
+                        resources.getIdentifier(
+                            "ic_${establishment.establishment_type.name.toLowerCase()}",
+                            "drawable",
+                            requireContext().packageName
+                        )
+                    if (iconResourceId != 0) {
+                        marker.icon =
+                            ContextCompat.getDrawable(this.requireContext(), iconResourceId);
+                    }
+
+                    this.map.overlays.add(marker)
+                }
+            }
     }
 
 }
