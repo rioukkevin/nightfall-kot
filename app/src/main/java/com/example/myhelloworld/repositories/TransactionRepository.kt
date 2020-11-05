@@ -9,7 +9,7 @@ class TransactionRepository : Repository() {
     /**
      * Add a transaction
      */
-    fun addTransaction(establishment_id: String): List<EstablishmentType> {
-        return this.request(Method.POST, "/transactions/create/${establishment_id}")
+    fun addTransaction(establishment_id: String) {
+        return this.request<Void>(Method.POST, "/transactions/create/${establishment_id}", null, null)
     }
 }

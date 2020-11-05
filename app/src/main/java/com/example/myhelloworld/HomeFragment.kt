@@ -7,15 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.myhelloworld.model.EstablishmentType
-import com.example.myhelloworld.repositories.abstractions.IEstablishmentTypeRepository
-import com.example.myhelloworld.repositories.config.RepositoryFactory
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.extension.send
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
@@ -37,23 +31,6 @@ class HomeFragment : Fragment() {
                     ).show()
                 }
             }
-
-        //Test
-        val repo = RepositoryFactory().getRepository<IEstablishmentTypeRepository>()
-        val estabCall = repo.getEstablishmentTypes()
-        estabCall.enqueue(object : Callback<List<EstablishmentType>> {
-            override fun onResponse(
-                call: Call<List<EstablishmentType>>,
-                response: Response<List<EstablishmentType>>
-            ) {
-                val myItem: List<EstablishmentType>? = response.body()
-            }
-
-            override fun onFailure(call: Call<List<EstablishmentType>>?, t: Throwable?) {
-                //Handle failure
-                val td = t
-            }
-        })
 
         return inflater.inflate(R.layout.fragment_home, container, false)
 

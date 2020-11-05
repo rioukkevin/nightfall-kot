@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.myhelloworld.map.mocks.EstablishmentMocks
+import com.example.myhelloworld.repositories.EstablishmentRepository
 import org.osmdroid.config.Configuration
 import org.osmdroid.library.BuildConfig
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -48,10 +48,9 @@ class MapFragment : Fragment(), LocationListener {
 
         //Configure map
         this.configureMap()
-//        val mapController: IMapController = this.mapView.getController()
-//        mapController.setZoom(9.5)
-//        val startPoint = GeoPoint(48.8583, 2.2944)
-//        mapController.setCenter(startPoint)
+
+        //Load markers
+        this.loadMarkers()
 
         requestPermissionsIfNecessary(
             arrayOf(
@@ -77,6 +76,10 @@ class MapFragment : Fragment(), LocationListener {
     override fun onPause() {
         super.onPause()
         map.onPause() //needed for compass, my location overlays, v6.0.0 and up
+    }
+
+    override fun onLocationChanged(location: Location) {
+
     }
 
     override fun onRequestPermissionsResult(
@@ -106,6 +109,38 @@ class MapFragment : Fragment(), LocationListener {
 
     }
 
+
+    private fun loadMarkers() {
+        EstablishmentRepository()
+            .getEstablishments { establishments ->
+                for (establishment in establishments) {
+                    //Start point
+                    val position = GeoPoint(
+                        establishment.address.coordinate.latitude,
+                        establishment.address.coordinate.longitude
+                    )
+
+                    //Create marker
+                    val marker = Marker(this.map)
+                    marker.title = establishment.name
+                    marker.position = position
+
+                    //Marker icon
+                    val iconResourceId =
+                        resources.getIdentifier(
+                            "ic_${establishment.establishment_type.name.toLowerCase()}",
+                            "drawable",
+                            requireContext().packageName
+                        )
+                    if (iconResourceId != 0) {
+                        marker.icon =
+                            ContextCompat.getDrawable(this.requireContext(), iconResourceId);
+                    }
+
+                    this.map.overlays.add(marker)
+                }
+            }
+    }
 
     /**
      * Request persmission if not already done
@@ -156,27 +191,6 @@ class MapFragment : Fragment(), LocationListener {
         this.map.setMultiTouchControls(true)
         this.map.overlays.add(rotationGestureOverlay)
 
-
-        //Add markers
-        EstablishmentMocks.establishments.forEach { estab ->
-            val startPoint = GeoPoint(estab.location.latitude, estab.location.longitude)
-            val marker = Marker(this.map)
-            marker.title = estab.name
-            marker.position = startPoint
-            val iconResourceId =
-                resources.getIdentifier(
-                    "ic_${estab.type.name.toLowerCase()}",
-                    "drawable",
-                    requireContext().packageName
-                )
-            if (iconResourceId != 0) {
-                marker.icon = ContextCompat.getDrawable(this.requireContext(), iconResourceId);
-
-            }
-
-            this.map.overlays.add(marker)
-        }
-
         //Add scale bar
         val dm: DisplayMetrics = requireContext().resources.displayMetrics
         val scaleBarOverlay = ScaleBarOverlay(this.map)
@@ -195,8 +209,5 @@ class MapFragment : Fragment(), LocationListener {
 
     }
 
-    override fun onLocationChanged(location: Location) {
-
-    }
 
 }

@@ -11,9 +11,15 @@ class EstablishmentType {
      */
     var color: String
 
+    /**
+     * Value of the establishment type
+     */
+    var points: Int
 
-    constructor(name: String, color: String) {
+
+    constructor(name: String, color: String, points: Int) {
         this.name = name
         this.color = color
+        this.points = points
     }
 }
