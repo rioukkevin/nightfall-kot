@@ -1,11 +1,15 @@
 package com.example.myhelloworld
 
 import android.Manifest
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.extension.permissionsBuilder
@@ -37,6 +41,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,7 +61,43 @@ class HomeFragment : Fragment() {
                     ).show()
                 }
             }
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        // Pseudo du joueur
+        val textPseudo = view.findViewById<TextView>(R.id.user_pseudo)
+        textPseudo.text = arguments?.get(ARG_PSEUDO).toString()
+
+        // Socore du joueur
+        val textScore = view.findViewById<TextView>(R.id.home_user_score_text)
+        textScore.text = arguments?.get(ARG_SCORE).toString().toFloat().toInt().toString()
+
+        // Score maximum
+        val textScoreMax = view.findViewById<TextView>(R.id.home_user_score_text_max)
+        textScoreMax.text = "1000"
+
+
+        userScorePieChart = view.findViewById<PieChart>(R.id.home_user_score_pie_chart)
+
+        pieEntries = ArrayList()
+
+        val score = arguments?.get(ARG_SCORE).toString().toFloat()
+
+        val entryScore = PieEntry(score, "")
+        pieEntries!!.add(entryScore)
+
+        val entryRestScore = PieEntry(1000f - score, "")
+        pieEntries!!.add(entryRestScore)
+
+        userScorePieChart.legend.isEnabled = false // Désactive les légendes
+
+        pieDataSet = PieDataSet(pieEntries, "")
+        pieData = PieData(pieDataSet)
+        pieData!!.setDrawValues(false)
+        userScorePieChart.data = pieData
+        pieDataSet!!.setColors(Color.rgb(255, 166, 0), Color.argb(0.3f, 10f, 10f, 10f))
+
+        return view
 
     }
 }
