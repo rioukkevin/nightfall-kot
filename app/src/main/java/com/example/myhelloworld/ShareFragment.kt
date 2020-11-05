@@ -2,7 +2,6 @@ package com.example.myhelloworld
 
 import android.app.Activity
 import android.content.ComponentName
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -37,7 +36,8 @@ class ShareFragment(activity: Activity) : Fragment() {
                 this.mainActivity,
                 "Nightfall c'est trop cool !",
                 "https://www.nightfallcards.fr/"
-            ) }
+            )
+        }
 
         // get reference to button
         val twitterShare = view?.findViewById(R.id.share_twitter) as GridLayout
@@ -48,18 +48,22 @@ class ShareFragment(activity: Activity) : Fragment() {
                 "Nightfall c'est trop cool !",
                 "https://www.nightfallcards.fr/",
                 "",
-            ""
-            ) }
+                ""
+            )
+        }
 
         // get reference to button
         val otherShare = view?.findViewById(R.id.share_other) as GridLayout
         // set on-click listener
         otherShare.setOnClickListener {
-            val intent= Intent()
-            intent.action=Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"Nightfall c'est trop cool ! https://www.nightfallcards.fr/")
-            intent.type="text/plain"
-            startActivity(Intent.createChooser(intent,"Partager avec"))
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Nightfall c'est trop cool ! https://www.nightfallcards.fr/"
+            )
+            intent.type = "text/plain"
+            startActivity(Intent.createChooser(intent, "Partager avec"))
         }
 
         return view
@@ -108,7 +112,13 @@ class ShareFragment(activity: Activity) : Fragment() {
      * @param via      twitter username without '@' who shares
      * @param hashtags hashtags for tweet without '#' and separated by ','
      */
-    private fun shareTwitter(activity: Activity, text: String, url: String, via: String, hashtags: String) {
+    private fun shareTwitter(
+        activity: Activity,
+        text: String,
+        url: String,
+        via: String,
+        hashtags: String
+    ) {
         val tweetUrl = StringBuilder("https://twitter.com/intent/tweet?text=")
         tweetUrl.append(if (TextUtils.isEmpty(text)) urlEncode(" ") else urlEncode(text))
         if (!TextUtils.isEmpty(url)) {
