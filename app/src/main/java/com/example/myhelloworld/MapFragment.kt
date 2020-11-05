@@ -2,8 +2,6 @@ package com.example.myhelloworld
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -20,6 +18,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.MinimapOverlay
 import org.osmdroid.views.overlay.ScaleBarOverlay
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
@@ -28,7 +27,7 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
-class MapFragment : Fragment(), LocationListener {
+class MapFragment : Fragment() {
 
     //Properties
 
@@ -78,10 +77,6 @@ class MapFragment : Fragment(), LocationListener {
         map.onPause() //needed for compass, my location overlays, v6.0.0 and up
     }
 
-    override fun onLocationChanged(location: Location) {
-
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -109,6 +104,80 @@ class MapFragment : Fragment(), LocationListener {
 
     }
 
+
+    /**
+     * Request persmission if not already done
+     */
+    private fun requestPermissionsIfNecessary(permissions: Array<String>) {
+        val permissionsToRequest: ArrayList<String> = ArrayList()
+        for (permission in permissions) {
+            if (ContextCompat.checkSelfPermission(this.requireContext(), permission)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Permission is not granted
+                permissionsToRequest.add(permission)
+            }
+        }
+        if (permissionsToRequest.size > 0) {
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                permissionsToRequest.toArray(arrayOfNulls(permissionsToRequest.size)),
+                R.integer.OSMDROID_REQUEST_CODE
+            )
+        }
+    }
+
+    private fun configureMap() {
+
+        //Add tile
+        this.map.setTileSource(TileSourceFactory.MAPNIK)
+
+        //Change user agent
+        val configOsm = Configuration.getInstance()
+        configOsm.userAgentValue = BuildConfig.APPLICATION_ID
+
+        //Zoom button and zoom with fingers
+        this.map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.SHOW_AND_FADEOUT)
+        this.map.zoomController.activate()
+        this.map.zoomController.setZoomInEnabled(true)
+        this.map.zoomController.setZoomOutEnabled(true)
+        this.map.setMultiTouchControls(true)
+
+        //Add compass
+        val compassOverlay =
+            CompassOverlay(context, InternalCompassOrientationProvider(context), this.map)
+        compassOverlay.enableCompass()
+        this.map.overlays.add(compassOverlay)
+
+        //Add rotation gestures
+        val rotationGestureOverlay = RotationGestureOverlay(context, this.map)
+        rotationGestureOverlay.setEnabled(true)
+        this.map.setMultiTouchControls(true)
+        this.map.overlays.add(rotationGestureOverlay)
+
+        //Add scale bar
+        val dm: DisplayMetrics = requireContext().resources.displayMetrics
+        val scaleBarOverlay = ScaleBarOverlay(this.map)
+        scaleBarOverlay.setCentred(true)
+        scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10)
+        this.map.overlays.add(scaleBarOverlay)
+
+        val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), this.map)
+        locationOverlay.enableMyLocation()
+        this.map.overlays.add(locationOverlay)
+
+        //Minimap
+        val minimapOverlay = MinimapOverlay(context, this.map.tileRequestCompleteHandler)
+        minimapOverlay.setWidth(dm.widthPixels / 5)
+        minimapOverlay.setHeight(dm.heightPixels / 5)
+        this.map.overlays.add(minimapOverlay)
+
+        //Set position
+        this.map.controller.setZoom(15)
+        this.map.controller.setCenter(GeoPoint(47.4667, -0.55))
+
+
+    }
 
     private fun loadMarkers() {
         EstablishmentRepository()
@@ -141,73 +210,5 @@ class MapFragment : Fragment(), LocationListener {
                 }
             }
     }
-
-    /**
-     * Request persmission if not already done
-     */
-    private fun requestPermissionsIfNecessary(permissions: Array<String>) {
-        val permissionsToRequest: ArrayList<String> = ArrayList()
-        for (permission in permissions) {
-            if (ContextCompat.checkSelfPermission(this.requireContext(), permission)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                // Permission is not granted
-                permissionsToRequest.add(permission)
-            }
-        }
-        if (permissionsToRequest.size > 0) {
-            ActivityCompat.requestPermissions(
-                this.requireActivity(),
-                permissionsToRequest.toArray(arrayOfNulls(permissionsToRequest.size)),
-                R.integer.OSMDROID_REQUEST_CODE
-            )
-        }
-    }
-
-
-    private fun configureMap() {
-
-        //Add tile
-        this.map.setTileSource(TileSourceFactory.MAPNIK)
-
-        //Change user agent
-        val configOsm = Configuration.getInstance()
-        configOsm.userAgentValue = BuildConfig.APPLICATION_ID
-
-        //Zoom button and zoom with fingers
-        this.map.zoomController.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
-        this.map.zoomController.activate()
-        this.map.setMultiTouchControls(true)
-
-        //Add compass
-        val compassOverlay =
-            CompassOverlay(context, InternalCompassOrientationProvider(context), this.map)
-        compassOverlay.enableCompass()
-        this.map.overlays.add(compassOverlay)
-
-        //Add rotation gestures
-        val rotationGestureOverlay = RotationGestureOverlay(context, this.map)
-        rotationGestureOverlay.setEnabled(true)
-        this.map.setMultiTouchControls(true)
-        this.map.overlays.add(rotationGestureOverlay)
-
-        //Add scale bar
-        val dm: DisplayMetrics = requireContext().resources.displayMetrics
-        val scaleBarOverlay = ScaleBarOverlay(this.map)
-        scaleBarOverlay.setCentred(true)
-        scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10)
-        this.map.overlays.add(scaleBarOverlay)
-
-        //Set position
-        val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), this.map)
-        locationOverlay.enableMyLocation()
-        this.map.overlays.add(locationOverlay)
-
-        this.map.controller.setZoom(15)
-        this.map.controller.setCenter(GeoPoint(47.4667, -0.55))
-
-
-    }
-
 
 }
