@@ -43,7 +43,7 @@
                 android:id="@+id/popup_window_background_container"
                 android:layout_width="250dp"
                 android:minHeight="170dp"
-                android:background="#bc214b"
+                android:background="@color/colorBlack"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true">
 
@@ -72,7 +72,7 @@
                     android:layout_height="45dp"
                     app:autoSizeTextType="uniform"
                     app:autoSizeMaxTextSize="24dp"
-                    android:background="#9E1C40"
+                    android:background="@color/colorBlack"
                     android:text="Title"
                     android:gravity="center"
                     android:textAlignment="center"
@@ -88,8 +88,8 @@
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="#851635"
-                    android:text="ok"
+                    android:background="@color/colorBlack"
+                    android:text=""
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
