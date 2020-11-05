@@ -16,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         title = resources.getString(R.string.view_home)
-        loadFragment(HomeFragment())
+        val homeFragment = HomeFragment.newInstance("pseudo du user", 750f)
+        loadFragment(homeFragment!!)
 
         navigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_home -> {
                     title = resources.getString(R.string.view_home)
-                    loadFragment(HomeFragment())
+                    loadFragment(homeFragment!!)
                     return@setOnNavigationItemSelectedListener true
                 }
 
