@@ -1,6 +1,6 @@
-package com.example.myhelloworld.map.models
+package com.example.myhelloworld.model
 
-import android.location.Location
+import com.example.myhelloworld.map.models.LatLng
 
 class Establishment {
     /**
