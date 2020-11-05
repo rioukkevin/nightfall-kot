@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    >
+    <ImageView
+        android:src="@drawable/background_image_dark"
+        tools:ignore="ContentDescription"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_column="0"
+        android:layout_row="0"
+        >
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_column="0"
+            android:layout_row="0"
+            >
+            <TextView
+                android:id="@+id/user_pseudo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="32sp" />
+
+        </GridLayout>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_column="0"
+            android:layout_row="1"
+            >
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/home_user_score_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:textAlignment="center"
+                >
+
+            </com.github.mikephil.charting.charts.PieChart>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                >
+                <LinearLayout
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/home_user_score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="Score"
+                    android:background = "@drawable/bottom_border_solid"
+                    />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/home_user_score_text_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:text="Score Max"
+                    />
+            </GridLayout>
+        </GridLayout>
+
+    </GridLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_marginBottom="70dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/logo_nightfall"
+        tools:ignore="ContentDescription" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:text="Button" />
+
+
+</GridLayout>

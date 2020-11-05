@@ -3,7 +3,6 @@ package com.example.myhelloworld
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.myhelloworld.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         title = resources.getString(R.string.view_home)
-        val homeFragment = HomeFragment.newInstance("pseudo du user", 750f)
+        val homeFragment = HomeFragment.newInstance("pseudo du user", 750f, this::loadFragment)
         loadFragment(homeFragment!!)
 
         navigationView.setOnNavigationItemSelectedListener {
