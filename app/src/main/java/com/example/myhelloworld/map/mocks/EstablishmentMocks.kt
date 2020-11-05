@@ -1,7 +1,7 @@
 package com.example.myhelloworld.map.mocks
 
-import com.example.myhelloworld.model.Establishment
 import com.example.myhelloworld.map.models.LatLng
+import com.example.myhelloworld.model.Establishment
 
 class EstablishmentMocks {
     companion object {
