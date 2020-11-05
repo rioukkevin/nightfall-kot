@@ -45,6 +45,7 @@ dependencies {
     implementation 'org.osmdroid:osmdroid-wms:6.1.8'
     implementation 'org.osmdroid:osmdroid-geopackage:6.1.8'
     implementation 'org.osmdroid:osmdroid-mapsforge:6.1.8'
+    implementation 'com.mysugr.MPAndroidChart:MPAndroidChart:3.1.0-mysugr-1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
