@@ -83,10 +83,10 @@ class HomeFragment : Fragment() {
         val infoI = view.findViewById<ImageView>(R.id.home_info_i)
         infoI.setOnClickListener{
             val intent = Intent(context, PopUpWindow::class.java)
-            intent.putExtra("popuptitle", "Error")
-            intent.putExtra("popuptext", "Sorry, that email address is already used!")
-            intent.putExtra("popupbtn", "OK")
-            intent.putExtra("darkstatusbar", false)
+            intent.putExtra("popuptitle", "Infos")
+            intent.putExtra("popuptext", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+            intent.putExtra("popupbtn", "X")
+            intent.putExtra("darkstatusbar", true)
             startActivity(intent)
         }
 
