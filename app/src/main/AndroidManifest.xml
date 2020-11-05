@@ -29,6 +29,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".PopUpWindow"
+            android:theme="@style/Theme.Transparent"
+            />
+
     </application>
 
 </manifest>
