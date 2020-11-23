@@ -1,11 +1,8 @@
 package com.example.myhelloworld
 
 import android.graphics.Color
-import android.graphics.RectF
 import android.Manifest
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +10,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.extension.send
@@ -82,8 +76,7 @@ class HomeFragment : Fragment() {
 
         //init listener
         textScore.setOnClickListener{
-            Log.i(TAG , "click !!")
-            val homeBisFragment = HomeBisFragment.newInstance("pseudo du user BIS", 750f)
+            val homeBisFragment = HomeBisFragment.newInstance("Nicolas", 750f)
             loadFragment(homeBisFragment!!)
         }
 

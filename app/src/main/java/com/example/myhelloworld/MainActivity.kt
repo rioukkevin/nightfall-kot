@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         title = resources.getString(R.string.view_home)
-        val homeFragment = HomeFragment.newInstance("pseudo du user", 750f, this::loadFragment)
+        val homeFragment = HomeFragment.newInstance("Nicolas", 750f, this::loadFragment)
         loadFragment(homeFragment!!)
 
         navigationView.setOnNavigationItemSelectedListener {

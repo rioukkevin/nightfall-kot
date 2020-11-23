@@ -1,20 +1,13 @@
 package com.example.myhelloworld
 
 import android.graphics.Color
-import android.graphics.RectF
-import android.Manifest
-import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -26,17 +19,21 @@ class HomeBisFragment : Fragment() {
     var pieDataSet: PieDataSet? = null
     var pieEntries: ArrayList<PieEntry>? = null
     var pieData: PieData? = null
-    lateinit var userScorePieChart: PieChart
+    lateinit var userMonthScorePieChart: PieChart
+    lateinit var userYearScorePieChart: PieChart
+    var maxScoreMonthValue : Int = 1000
+    var maxScoreYearValue : Int = maxScoreMonthValue * 12
+    var maxScoreMonth : String = maxScoreMonthValue.toString()
+    var maxScoreYear : String = maxScoreYearValue.toString()
 
     companion object {
-        fun newInstance(pseudo: String?, score: Float): HomeFragment? {
-            val fragment = HomeFragment()
+        fun newInstance(pseudo: String?, score: Float): HomeBisFragment? {
+            val fragment = HomeBisFragment()
             val args = Bundle()
             // On passe les argument pour pouvoir les récupérer dans le onCreate
             args.putString(ARG_PSEUDO, pseudo)
             args.putFloat(ARG_SCORE, score)
             fragment.arguments = args
-            Log.i(ContentValues.TAG, "in home bis !!")
 
             return fragment
         }
@@ -51,39 +48,44 @@ class HomeBisFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home_bis, container, false)
 
         // Pseudo du joueur
-        val textPseudo = view.findViewById<TextView>(R.id.user_pseudo)
-        textPseudo.text = arguments?.get(ARG_PSEUDO).toString()
+        view.findViewById<TextView>(R.id.user_pseudo).text = arguments?.get(ARG_PSEUDO).toString()
 
-        // Socore du joueur
-        val textScore = view.findViewById<TextView>(R.id.home_user_score_text)
-        textScore.text = arguments?.get(ARG_SCORE).toString().toFloat().toInt().toString()
+        // Score du joueur pour le mois
+        view.findViewById<TextView>(R.id.home_user_score_text_month).text = arguments?.get(ARG_SCORE).toString()
+
+        // Score du joueur pour l'année
+        view.findViewById<TextView>(R.id.home_user_score_text_year).text = "5000"
 
         // Score maximum
-        val textScoreMax = view.findViewById<TextView>(R.id.home_user_score_text_max)
-        textScoreMax.text = "1000"
+        view.findViewById<TextView>(R.id.home_user_score_text_month_max).text = maxScoreMonth
+        view.findViewById<TextView>(R.id.home_user_score_text_year_max).text = maxScoreYear
 
+        userMonthScorePieChart = view.findViewById<PieChart>(R.id.home_user_score_pie_chart_month)
+        userMonthScorePieChart.legend.isEnabled = false // Désactive les légendes
+        userMonthScorePieChart.data = buildPieChartScore(arguments?.get(ARG_SCORE).toString().toFloat(), maxScoreMonthValue.toFloat())
 
-        userScorePieChart = view.findViewById<PieChart>(R.id.home_user_score_pie_chart)
+        userYearScorePieChart = view.findViewById<PieChart>(R.id.home_user_score_pie_chart_year)
+        userYearScorePieChart.legend.isEnabled = false // Désactive les légendes
+        userYearScorePieChart.data = buildPieChartScore(4600f, maxScoreYearValue.toFloat() )
 
-        pieEntries = ArrayList()
+        return view
 
-        val score = arguments?.get(ARG_SCORE).toString().toFloat()
+    }
+
+    private fun buildPieChartScore(score : Float, divisor : Float): PieData? {
 
         val entryScore = PieEntry(score, "")
+        pieEntries = ArrayList()
         pieEntries!!.add(entryScore)
 
-        val entryRestScore = PieEntry(1000f - score, "")
+        val entryRestScore = PieEntry(divisor - score, "")
         pieEntries!!.add(entryRestScore)
-
-        userScorePieChart.legend.isEnabled = false // Désactive les légendes
 
         pieDataSet = PieDataSet(pieEntries, "")
         pieData = PieData(pieDataSet)
         pieData!!.setDrawValues(false)
-        userScorePieChart.data = pieData
         pieDataSet!!.setColors(Color.rgb(255, 166, 0), Color.rgb(255, 166, 0))
 
-        return view
-
+        return pieData;
     }
 }
