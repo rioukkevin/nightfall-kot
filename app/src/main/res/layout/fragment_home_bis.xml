@@ -20,31 +20,31 @@
         android:layout_column="0"
         android:layout_row="0"
         >
-        <GridLayout
+        <TextView
+            android:id="@+id/user_pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_column="0"
-            android:layout_row="0"
-            >
-            <TextView
-                android:id="@+id/user_pseudo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:textAlignment="center"
-                android:textColor="@color/colorWhite"
-                android:textSize="32sp" />
-
-        </GridLayout>
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_column="0"
             android:layout_row="1"
+            android:layout_column="0"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="32sp" />
+
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:layout_column="0"
+        android:layout_row="0"
+        android:orientation="horizontal">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             >
 
             <com.github.mikephil.charting.charts.PieChart
@@ -92,11 +92,9 @@
         </GridLayout>
 
         <GridLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_column="0"
-            android:layout_row="1"
             >
 
             <com.github.mikephil.charting.charts.PieChart
@@ -143,7 +141,7 @@
             </GridLayout>
         </GridLayout>
 
-    </GridLayout>
+    </LinearLayout>
 
     <ImageView
         android:layout_width="match_parent"
