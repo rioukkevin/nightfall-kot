@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/user_pseudo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:layout_row="1"
             android:layout_column="0"
             android:textAlignment="center"
@@ -43,14 +43,14 @@
 
         <GridLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             >
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/home_user_score_pie_chart_year"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="300dp"
                 android:layout_row="0"
                 android:layout_column="0"
                 android:textAlignment="center"
@@ -93,14 +93,14 @@
 
         <GridLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_gravity="center"
             >
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/home_user_score_pie_chart_month"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="120dp"
+                android:layout_height="300dp"
                 android:layout_row="0"
                 android:layout_column="0"
                 android:textAlignment="center"

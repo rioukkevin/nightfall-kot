@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
         pieData = PieData(pieDataSet)
         pieData!!.setDrawValues(false)
         userScorePieChart.data = pieData
-        pieDataSet!!.setColors(Color.rgb(255, 166, 0), Color.argb(0.3f, 10f, 10f, 10f))
+        pieDataSet!!.setColors(Color.rgb(255, 166, 0), Color.rgb(255, 166, 0))
 
         return view
 
