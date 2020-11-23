@@ -84,7 +84,7 @@ class HomeBisFragment : Fragment() {
         pieDataSet = PieDataSet(pieEntries, "")
         pieData = PieData(pieDataSet)
         pieData!!.setDrawValues(false)
-        pieDataSet!!.setColors(Color.rgb(255, 166, 0), Color.rgb(255, 166, 0))
+        pieDataSet!!.setColors(Color.rgb(255, 166, 0), Color.argb(0.3f, 10f, 10f, 10f))
 
         return pieData;
     }
