@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.budiyev.android.codescanner.*
+import com.example.myhelloworld.repositories.TransactionRepository
 import com.google.zxing.BarcodeFormat
 
 class QrFragment : Fragment() {
@@ -39,7 +40,10 @@ class QrFragment : Fragment() {
         codeScanner.camera = CodeScanner.CAMERA_BACK
         codeScanner.decodeCallback = DecodeCallback {
             activity.runOnUiThread {
-                Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
+                TransactionRepository()
+                    .addTransaction(it.text)
+                //TODO: Change text
+                Toast.makeText(activity, "Bravo !", Toast.LENGTH_LONG).show()
             }
         }
         scannerView.setOnClickListener {

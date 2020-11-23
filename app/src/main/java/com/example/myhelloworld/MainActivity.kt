@@ -1,7 +1,7 @@
 package com.example.myhelloworld
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.navigation_share-> {
-                    title=resources.getString(R.string.view_share)
-                    loadFragment(ShareFragment(activity = this@MainActivity ))
+                R.id.navigation_share -> {
+                    title = resources.getString(R.string.view_share)
+                    loadFragment(ShareFragment(activity = this@MainActivity))
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.navigation_news-> {
-                    title=resources.getString(R.string.view_news)
+                R.id.navigation_news -> {
+                    title = resources.getString(R.string.view_news)
                     loadFragment(NewsFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
