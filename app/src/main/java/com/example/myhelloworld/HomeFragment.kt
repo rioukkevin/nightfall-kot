@@ -30,9 +30,6 @@ private const val ARG_PSEUDO = "pseudo"
 private const val ARG_SCORE = "score"
 
 
-private const val ARG_PSEUDO = "pseudo"
-private const val ARG_SCORE = "score"
-
 class HomeFragment : Fragment() {
     var pieDataSet: PieDataSet? = null
     var pieEntries: ArrayList<PieEntry>? = null
