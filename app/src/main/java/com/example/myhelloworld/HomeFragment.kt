@@ -21,10 +21,13 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.extension.send
+import kotlin.reflect.KFunction1
+
+private const val ARG_PSEUDO = "pseudo"
+private const val ARG_SCORE = "score"
 
 
 private const val ARG_PSEUDO = "pseudo"
@@ -35,15 +38,21 @@ class HomeFragment : Fragment() {
     var pieEntries: ArrayList<PieEntry>? = null
     var pieData: PieData? = null
     lateinit var userScorePieChart: PieChart
+    lateinit var loadFragment: KFunction1<Fragment, Unit>
 
     companion object {
-        fun newInstance(pseudo: String?, score: Float): HomeFragment? {
+        fun newInstance(
+            pseudo: String?,
+            score: Float,
+            loadFragment: KFunction1<@ParameterName(name = "fragment") Fragment, Unit>
+        ): HomeFragment? {
             val fragment = HomeFragment()
             val args = Bundle()
             // On passe les argument pour pouvoir les récupérer dans le onCreate
             args.putString(ARG_PSEUDO, pseudo)
             args.putFloat(ARG_SCORE, score)
             fragment.arguments = args
+            fragment.loadFragment = loadFragment
             return fragment
         }
     }
@@ -79,6 +88,12 @@ class HomeFragment : Fragment() {
         val textScore = view.findViewById<TextView>(R.id.home_user_score_text)
         textScore.text = arguments?.get(ARG_SCORE).toString().toFloat().toInt().toString()
 
+        //init listener
+        textScore.setOnClickListener{
+            val homeBisFragment = HomeBisFragment.newInstance("Nicolas", 750f)
+            loadFragment(homeBisFragment!!)
+        }
+      
         // Bonton d'information
         val infoI = view.findViewById<ImageView>(R.id.home_info_i)
         infoI.setOnClickListener{
