@@ -83,7 +83,7 @@ class HomeFragment : Fragment() {
         val infoI = view.findViewById<ImageView>(R.id.home_info_i)
         infoI.setOnClickListener{
             val intent = Intent(context, PopUpWindow::class.java)
-            intent.putExtra("popuptitle", "Infos")
+            intent.putExtra("popuptitle", "Utilisation")
             intent.putExtra("popuptext", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
             intent.putExtra("popupbtn", "X")
             intent.putExtra("darkstatusbar", true)
